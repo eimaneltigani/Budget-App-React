@@ -1,0 +1,1 @@
+export const Categeries = ['Wants', 'Needs', 'Savings', 'Remaining'];

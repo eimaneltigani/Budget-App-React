@@ -1,16 +1,17 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { defaultExpenses } from "../../constants/sample";
 import { useSelector } from "react-redux";
-import { defaultExpenses } from "../../components/constants";
+// import { defaultExpenses } from "../../components/constants/sample";
 
 
 export const expensesSlice = createSlice({
     name: 'expenses',
     initialState: {
-        expenses: defaultExpenses,
+        expenses: defaultExpenses
     },
     reducers: {
-        recieveExpenses: (state, action) => {
-            return {...state, expenses: [action.payload]};
+        receiveExpenses: (state,action) => {
+            return { ...state, expenses: [...action.payload]};
         },
         addExpense: (state, action) => {
             return { ...state, expenses: [...state.expenses, action.payload]};
@@ -38,8 +39,7 @@ export const expensesSlice = createSlice({
     } 
 })
 
-export const { recieveExpenses, addExpense, editExpense, deleteExpense } = expensesSlice.actions;
-
+export const { receiveExpenses, addExpense, editExpense, deleteExpense } = expensesSlice.actions;
 
 
 //Selector

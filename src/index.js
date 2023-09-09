@@ -1,18 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+
 
 import firebase, { FirebaseContext } from './components/Firebase';
 import App from './components/App';
+
+// Redux store
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+
+// Styling
+import GlobalStyle from './components/GlobalStyle';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './tailwind.js';
+import './css/tailwind.css';
+
+
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <FirebaseContext.Provider value={new firebase()}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </FirebaseContext.Provider>
+  <Provider store={store}>
+    <FirebaseContext.Provider value={new firebase()}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <App />
+        </ThemeProvider>
+    </FirebaseContext.Provider>
+  </Provider>
 );
   
 

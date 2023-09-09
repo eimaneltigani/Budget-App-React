@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { defaultIncome } from "../../components/constants";
+import { defaultIncome } from "../../constants/sample";
 
 export const incomeSlice = createSlice({
     name: 'income',
@@ -7,19 +7,16 @@ export const incomeSlice = createSlice({
         income: defaultIncome
     },
     reducers: {
-        recieveIncome: (state, action) => {
+        receiveIncome: (state, action) => {
             return {...state, income: action.payload};
         },
         updateIncome: (state, action) => {
             return {...state, income: action.payload};
-        },
-        resetIncome: (state) => {
-            return {...state, income: defaultIncome};
         }
     }
 })
 
-export const { recieveIncome, updateIncome, resetIncome } = incomeSlice.actions;
+export const { receiveIncome, updateIncome, resetIncome } = incomeSlice.actions;
 
 export const selectIncome = (state) => state.income.income;
 

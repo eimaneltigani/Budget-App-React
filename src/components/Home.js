@@ -6,12 +6,42 @@ import Income from './Income';
 import Header from './Header';
 import Expenses from './Expenses';
 import Report from './Report';
-
-import { connect } from 'react-redux';
-import { handleFirebaseData, handleSampleData } from '../constants/helperfunctions';
-import { withFirebase } from './Firebase';
 import Statistics from './Statistics';
 
+import { receiveExpenses } from '../redux/store/expensesSlice';
+import { receiveIncome } from '../redux/store/incomeSlice';
+import { defaultExpenses } from "../constants/sample";
+import { defaultIncome } from "../constants/sample";
+
+import { connect } from 'react-redux';
+import { withFirebase } from './Firebase';
+
+
+const handleFirebaseData = (uid, firebase) => {
+    return dispatch => {
+      return firebase.user(uid).once('value', snapshot => {
+        const { income, expenses} = snapshot.val();
+  
+        dispatch(
+          receiveIncome(income)
+        );
+        dispatch(
+          receiveExpenses(expenses)
+        );
+      });
+    };
+};
+
+const handleSampleData = () => {
+    return dispatch => {
+        dispatch(
+            receiveIncome(defaultIncome)
+        );
+        dispatch(
+            receiveExpenses(defaultExpenses)
+        );
+    }
+};
 
 class Home extends React.Component {
     componentDidUpdate(prevProps) {

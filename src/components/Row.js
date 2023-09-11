@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+/** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
 import 'styled-components/macro';
 
@@ -14,7 +15,7 @@ class Row extends Component {
     render() {
         const { category, cost, income, color } = this.props;
         return (
-            <div css={tw`flex items-center flex-wrap w-full py-2 border-b border-teal-400 text-left`}>
+            <div css={tw`flex items-center flex-wrap w-full py-2 border-b border-teal-default text-left`}>
                 <span css={tw`w-1/4 px-2 flex items-center`}>
                 <span
                     css={tw`flex-none rounded-full w-3 h-3 mr-2`}

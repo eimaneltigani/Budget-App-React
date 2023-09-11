@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-
+/** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
 import styled from 'styled-components/macro';
+import 'styled-components/macro';
 
 import { addExpense, editExpense, deleteExpense, selectExpenses } from '../redux/store/expensesSlice';
 import { FaRegTrashAlt, FaPlus } from 'react-icons/fa';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { setExpenseAmountPerCategory, addExpenseAmountPerCategory } from "../redux/store/statisticsSlice";
 import { selectIncome } from '../redux/store/incomeSlice';
@@ -14,9 +14,8 @@ import { withFirebase } from './Firebase';
 const Row = tw.div`flex items-center`;
 
 const Label = styled.div`
-  ${tw`text-teal-50 uppercase text-xs font-bold`}
+  ${tw`text-teal-default uppercase text-xs font-bold`}
 `;
-
 
 
 export const calculateTotalExpenses = (expenses) => {
@@ -86,16 +85,16 @@ function Expenses() {
                     <Row css={tw`-mx-2 mb-4`} key={expense.key}>
                         <div css={tw`w-4/12 px-2`}>
                             <input
-                                css={tw`w-full bg-white shadow rounded leading-tight appearance-none p-3`}
+                                css={tw`block appearance-none w-full bg-white shadow rounded leading-tight p-3`}
+                                type="text"
                                 name="description" 
-                                defaultValue={expense.description} 
+                                value={expense.description} 
                                 onChange={e => handleEdit(expense.key, e)}>
                             </input>
                         </div>
                         <div css={tw`w-3/12 px-2`}>
-                            <div css={tw`relative`}>
                                 <select 
-                                    css={tw`block appearance-none w-full bg-white shadow p-3 pr-8 rounded leading-tight`}
+                                    css={tw`block appearance-none w-full bg-white shadow p-3 rounded leading-tight`}
                                     name="category" 
                                     value={expense.category} 
                                     onChange={e => handleEdit(expense.key, e)}
@@ -104,31 +103,30 @@ function Expenses() {
                                     <option name="needs">Needs</option>
                                     <option name="savings">Savings</option>  
                                 </select>
-                            </div>
                         </div>
                         <div css={tw`w-4/12 px-2`}>
                             <div css={tw`flex items-center`}>
                                 <div
-                                    css={tw`bg-gray-50 p-3 rounded-tl rounded-bl shadow leading-tight`}
+                                    css={tw`bg-grey-light p-3 rounded-tl rounded-bl shadow leading-tight`}
                                 >
                                     $
                                 </div>
                                 <input 
-                                    css={tw`w-full rounded-l-none rounded-r bg-white shadow  leading-tight appearance-none p-3`}
+                                    css={tw`w-full bg-grey-light rounded-l-none rounded-r shadow leading-tight appearance-none p-3`}
                                     type="number" className="cost" name="cost" value={expense.cost} onChange={e => handleValueEdit(expense.key, e)} >
                                 </input>
                             </div>
                         </div>
                         <div css={tw`w-1/12 px-1`}>
-                            <button onClick={() => handleDelete(expense.key)}>
-                                <FaRegTrashAlt css={tw`text-teal-400 fill-current w-4 h-4 hover:text-teal-50`}/>
+                            <button css={tw`bg-transparent shadow-none`} onClick={() => handleDelete(expense.key)}>
+                                <FaRegTrashAlt css={tw`text-teal-default w-4 h-4 hover:text-teal-light shadow-none bg-transparent`}/>
                             </button>
                         </div> 
                     </Row>
                 )
             })}
-            <button css={tw`rounded py-2 px-4 text-teal-400 border-2 border-teal-100 bg-transparent flex items-center hover:border-teal-200 hover:text-teal-200 font-bold hover:bg-transparent`} onClick={() => handleAdd()}>
-                <FaPlus css={tw`text-teal-400 fill-current w-3 h-3 mr-1`}/>
+            <button css={tw`rounded py-2 px-4 text-teal-default border-2 border-teal-light bg-transparent flex items-center hover:border-teal-light hover:text-teal-light font-bold hover:bg-transparent`} onClick={() => handleAdd()}>
+                <FaPlus css={tw`fill-teal-default w-3 h-3 mr-1 shadow-none`}/>
                 Add expense
             </button>
         </>

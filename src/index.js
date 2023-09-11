@@ -13,7 +13,7 @@ import { store } from './redux/store';
 import GlobalStyle from './components/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './tailwind.js';
-import './css/tailwind.css';
+import './tailwind.css';
 
 
 import reportWebVitals from './reportWebVitals';

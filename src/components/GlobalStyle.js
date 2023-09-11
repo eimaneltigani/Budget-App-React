@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
       ${props => props.theme.colors.teal.dark} 0%,
       ${props => props.theme.colors.blue} 100%
     );
-    ${tw`bg-fixed bg-no-repeat font-sans font-normal leading-normal text-gray-600 h-full`}
+    ${tw`bg-fixed bg-no-repeat font-sans font-normal leading-normal text-grey-default h-full`}
   }
 `;
 

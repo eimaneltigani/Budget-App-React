@@ -1,5 +1,5 @@
 import React from 'react';
-// import { css } from 'emotion'
+/** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
 
 import Income from './Income';
@@ -25,26 +25,26 @@ class Home extends React.Component {
 
     render() {
         return(
-            <div className="container" tw="py-4 lg:py-8 overflow-hidden">
+            <div className="container" css={tw`py-4 lg:py-8 overflow-hidden`}>
                 <Header />
-                <main tw="flex flex-wrap -mx-8">
-                    <div tw="lg:w-1/2 px-8 mb-8 lg:mb-0">
-                        <h2 tw="text-white text-xl font-light max-w-md">
+                <main css={tw`flex flex-wrap -mx-8`}>
+                    <div css={tw`w-full lg:w-1/2 px-8 mb-8 lg:mb-0`}>
+                        <h2 css={tw`text-white text-3xl font-bold mt-8`}>
                             Own your money
                         </h2>
-                        <p tw="text-white text-xl font-light max-w-md">
+                        <p css={tw`text-white text-xl font-light max-w-md`}>
                             This virtual budget program helps keep you on track of your spending habits. Categorize your spend into different types and prioritize the financial goals that matter most to you. 
                         </p>
                         <Income />
                         <Expenses />
                     </div>
-                    <div tw="lg:w-1/2 px-8 mb-8 lg:mb-0">
-                        <div tw="bg-white rounded-lg shadow p-4 lg:p-8 mb-8">
+                    <div css={tw`w-full lg:w-1/2 px-8 mb-8 lg:mb-0`}>
+                        <div css={tw`bg-white rounded-lg shadow p-4 lg:p-8 mb-8`}>
                             <Statistics />
                             <Report />
                         </div>
-                        <h3 tw="text-white text-lg font-bold mb-2">What now?</h3>
-                        <p tw="text-white mb-8">Sign up to save your data and keep track of your budgeting goals! Save, spend, and give toward what's important in your life.</p>
+                        <h3 css={tw`text-white text-lg font-bold mb-2`}>What now?</h3>
+                        <p css={tw`text-white mb-8`}>Sign up to save your data and keep track of your budgeting goals! Save, spend, and give toward what's important in your life.</p>
                     </div>
                 </main>
             </div>

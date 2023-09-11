@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+/** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
@@ -12,7 +13,7 @@ import { withFirebase } from './Firebase';
 
 const Text = tw.span`hidden lg:inline-block mr-2 italic text-white`;
 const Button = styled.button`
-    ${tw`rounded py-2 px-4 bg-teal-400 no-underline text-blue-900 border-2 border-transparent hover:bg-teal-200`}
+    ${tw`rounded py-2 px-4 bg-teal-default no-underline text-blue border-2 border-transparent hover:bg-teal-light`}
 `;
 
 const NavigationNonAuth = () => {
@@ -55,7 +56,7 @@ const Header = ({ firebase }) => {
     return (
         <header css={tw`mb-4 lg:mb-8 flex items-center justify-between`}>
             <div>
-                <p css={tw`text-white text-2xl font-bold`}>Budgeter<span css={tw`text-teal-300`}>App</span></p>
+                <p css={tw`text-white text-2xl font-bold`}>Budgeter<span css={tw`text-teal-default`}>App</span></p>
             </div>
             {!user ? (
                 <NavigationNonAuth />

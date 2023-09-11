@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCategories } from "../redux/store/statisticsSlice";
 import { theme } from "../tailwind";
+/** @jsxImportSource @emotion/react */
+import tw from 'twin.macro';
 Chart.register(ArcElement);
 
 
@@ -38,23 +40,25 @@ const Statistics = () => {
 
     return (
         <div>   
-            <p class="text-2xl mb-1 font-bold">How do you spend?</p>
-            <p class="font-bold">Here's a breakdown of your expenses:</p>
-            <div class="max-h-96 -mt-20 py-4 min-w-0">
+            <h2 css={tw`text-2xl mb-1 font-bold`}>How do you spend?</h2>
+            <p>Here's a breakdown of your expenses:</p>
+            <div css={tw`max-h-96 -mb-8 w-full flex justify-center items-center py-3`}>
                 <Doughnut 
                     data={data} 
                     options={{
+                        aspectRatio: 1.5,
                         plugins: {
                             legend: {
-                                position: 'right',
+                                // position: 'left',
                                 labels: {
                                     font: {
-                                        size: 17
+                                        size: 15
                                     },
-                                    padding: 30
+                                    usePointStyle: true,
+                                    pointStyle: 'circle'
                                 }
                             }
-                        }
+                        },
                     }}
                 />
             </div>

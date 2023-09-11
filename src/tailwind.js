@@ -24,8 +24,6 @@ module.exports = {
       padding: '1rem'
     }
   },
-  variants: {
-    extend: {},
-  },
+  variants: {},
   plugins: [],
 }

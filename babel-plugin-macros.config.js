@@ -1,10 +1,11 @@
 module.exports = {
-    tailwind: {
+    // tailwind: {
+    //     plugins: ["macros"],
+    //     config: './src/tailwind.js',
+    //     preset: 'styled-components',
+    // },
+    twin: {
         config: './src/tailwind.js',
-        styled: 'styled-components/macro',
-        // format: "auto"
-    //   plugins: ["macros"],
-    //   config: "./src/tailwind.js",
-    //   format: "auto"
+        preset: 'styled-components'
     }
 };

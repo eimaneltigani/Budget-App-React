@@ -1,10 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { redirect } from "react-router-dom";
+import tw from 'twin.macro';
+import styled from 'styled-components/macro';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import * as firebaseui from 'firebaseui';
-import 'firebaseui/dist/firebaseui.css';
 import { login } from '../redux/store/userSlice';
 import {withFirebase} from './Firebase';
+
+const AuthContainer = styled.div`
+  ${tw`w-full`}
+
+  .firebaseui-id-page-callback {
+    min-height: ${props => (props.isRedirect ? 0 : '200px')};
+  }
+
+  .firebaseui-callback-indicator-container {
+    height: ${props => (props.isRedirect ? 0 : '120px')};
+
+    .firebaseui-busy-indicator {
+      ${tw`hidden`}
+    }
+  }
+`;
 
 class Login extends React.Component {
     componentDidUpdate() {
@@ -49,14 +67,19 @@ class Login extends React.Component {
         }
     }
 
-    componentDidMount() {
-        const ui = new firebaseui.auth.AuthUI(this.props.firebase.auth);
-        ui.start('#firebaseui-auth-container', this.uiConfig)
-    }
+    // componentDidMount() {
+    //     const ui = new firebaseui.auth.AuthUI(this.props.firebase.auth);
+    //     ui.start('#firebaseui-auth-container', this.uiConfig)
+    // }
 
     render() {
         return(
-            <div id="firebaseui-auth-container"></div>
+            <div>
+                <StyledFirebaseAuth
+                    uiConfig={this.uiConfig}
+                    firebaseAuth={firebase.authFn}
+                />
+            </div>
         )
     }
 }

@@ -1,4 +1,5 @@
 import React from "react";
+/** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
 import styled from 'styled-components/macro';
 import { selectIncome } from "../redux/store/incomeSlice";
@@ -9,7 +10,7 @@ import Row from "./Row";
 
 
 const Label = styled.div`
-  ${tw`text-teal-400 uppercase text-xs font-bold`}
+  ${tw`text-teal-default uppercase text-xs font-bold`}
 `;
 
 
@@ -20,10 +21,10 @@ const Report = () => {
 
     return (
         <div >
-            <div css={tw`flex items-center flex-wrap w-full pt-10 pb-2 border-b border-teal-400 text-left`}>
+            <div css={tw`flex items-center flex-wrap w-full pt-10 pb-2 border-b border-teal-default text-left`}>
                 <Label css={tw`w-1/4 indent-4 px-2 pt-5`}>Category</Label>
                 <Label css={tw`w-1/4 px-2 pt-5 text-right`}>
-                    % <span css={tw`hidden sm:inline`}>of total</span>
+                    % of Total
                 </Label>
                 <Label css={tw`w-6/12 px-2 pt-5 text-right mr-auto`}>Total Amount</Label>
             </div>

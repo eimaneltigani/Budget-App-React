@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateIncome } from '../redux/store/incomeSlice';
+/** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
 import styled from 'styled-components/macro';
+import { NumericFormat } from 'react-number-format';
 
 
 const Row = tw.div`flex items-center`;
 const Label = styled.div`
-  ${tw`text-teal-50 uppercase text-xs font-bold`}
+  ${tw`text-teal-light uppercase text-xs font-bold`}
+`;
+const Input = styled.input`
+  ${tw`w-full bg-white shadow rounded leading-tight appearance-none p-3`}
 `;
 
 const Income = () => {
@@ -31,7 +36,7 @@ const Income = () => {
                     <Row css={tw`-mx-2`}>
                         <div css={tw`w-6/12 sm:w-7/12 px-2`}>
                             <input 
-                                css={tw`w-full h-1 bg-teal-400 rounded-lg appearance-none cursor-pointer`}
+                                css={tw`w-full h-1 bg-teal-default rounded-lg appearance-none cursor-pointer`}
                                 type="range" 
                                 defaultValue={5000} 
                                 min="0" 
@@ -44,19 +49,19 @@ const Income = () => {
                         <div css={tw`w-5/12 sm:w-4/12 px-2 mr-auto`}>
                             <div css={tw`flex items-center`}>
                                 <div
-                                    css={tw`bg-gray-50 p-3 rounded-tl rounded-bl shadow leading-tight`}
+                                    css={tw`bg-grey-light p-3 rounded-tl rounded-bl shadow leading-tight`}
                                 >
                                     $
                                 </div>
-                                <input 
-                                    css={tw`w-full rounded-l-none rounded-r bg-white shadow  leading-tight appearance-none p-3`}
-                                    type="number" 
-                                    min="0" 
-                                    max="20000" 
-                                    className="input"
+                                <NumericFormat 
+                                    customInput={Input}
+                                    allowNegative={false}
+                                    thousandSeparator=","
+                                    decimalScale={2}
+                                    css={tw`rounded-l-none rounded-r text-right min-w-0`}
+                                    maxLength="20"
                                     value={value}
-                                    step="100" 
-                                    onChange={(e) => handleUpdate(e)}
+                                    onValueChange={(e) => handleUpdate(e)}
                                 />
                             </div>
                         </div>

@@ -22,6 +22,12 @@ class firebase {
     // this.dbFn = this.app.database();
   }
 
+  doCreateUserWithEmailAndPassword = (email,password) =>
+    this.auth.createUserWithEmailAndPassword(email, password);
+
+  doSignInWithEmailAndPassword = (email, password) =>
+    this.auth.signInWithEmailAndPassword(email, password);
+
   user = (uid) => this.db.ref(`users/${uid}`);
   key = () => this.db.ref().push().key;
   timestamp = () => this.db.ServerValue.TIMESTAMP;

@@ -7,79 +7,117 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import * as firebaseui from 'firebaseui';
 import { login } from '../redux/store/userSlice';
 import {withFirebase} from './Firebase';
+import '../css/Login.css';
+import withRouter from './withRouter';
 
-const AuthContainer = styled.div`
-  ${tw`w-full`}
-
-  .firebaseui-id-page-callback {
-    min-height: ${props => (props.isRedirect ? 0 : '200px')};
-  }
-
-  .firebaseui-callback-indicator-container {
-    height: ${props => (props.isRedirect ? 0 : '120px')};
-
-    .firebaseui-busy-indicator {
-      ${tw`hidden`}
-    }
-  }
-`;
 
 class Login extends React.Component {
-    componentDidUpdate() {
-        const { state } = this.props;
-        const { expenses, income, statistics, setLogin} = state;
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            fireErrors: '',
+            redirect: false,
+            newAccount: true
+        };
+    }
 
-        localStorage.setItem(
-            'budgetAppState',
-            JSON.stringify({
-                expenses,
-                income,
-                statistics
+    handleChange = e => {
+        this.setState({[e.target.name]: e.target.value});
+    }
+
+    handleClick = () => {
+        this.setState(prevState => ({
+            redirect: !prevState.redirect
+        }))
+    }
+
+    onSignUp = (e) => {
+        const { email, password} = this.state;
+        const { navigate } = this.props;
+
+        this.props.firebase
+            .doCreateUserWithEmailAndPassword(email,password)
+            .then(authUser =>{
+                this.props.setLogin(authUser);
+                navigate("/");
             })
-        )
+            .catch(error => {
+                this.setState({fireErrors: error.message})
+            })
+
+        e.preventDefault()
     }
 
-    uiConfig = {
-        // signInFlow: "popup",
-        signInOptions: [
-            this.props.firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-            {
-            provider: this.props.firebase.auth.EmailAuthProvider.PROVIDER_ID,
-            requireDisplayName: false
-            },
-        ],
-        credentialHelper: firebaseui.auth.CredentialHelper.NONE,
-        callbacks: {
-            signInSuccessWithAuthResult: (result) => {
-                const user = result.user;
-                const newUser = result.additionalUserInfo.isNewUser;
+    onSignIn = (e) => {
+        const { email, password } = this.state;
+        const { navigate } = this.props;
 
-                newUser &&
-                    this.props.firebase.user(user.uid).set({
-                        ...JSON.parse(localStorage.getItem('budgetAppState')),
-                        lastSaved: this.props.firebase.timeStamp()
-                    });
+        this.props.firebase
+            .doSignInWithEmailAndPassword(email, password)
+            .then((authUser) => {
+                this.props.setLogin(authUser);
+                navigate("/");
+            })
+            .catch(error => {
+                this.setState({fireErrors: error.message});
+            });
 
-                this.setLogin(user);
-
-                redirect("/");
-            }
-        }
+        e.preventDefault();
     }
-
-    // componentDidMount() {
-    //     const ui = new firebaseui.auth.AuthUI(this.props.firebase.auth);
-    //     ui.start('#firebaseui-auth-container', this.uiConfig)
-    // }
 
     render() {
+        let errorNotification = this.state.fireErrors ? 
+        ( <div className="Error"> {this.state.fireErrors} </div> ) : null;
         return(
-            <div>
-                <StyledFirebaseAuth
-                    uiConfig={this.uiConfig}
-                    firebaseAuth={firebase.authFn}
-                />
-            </div>
+            <>
+                {errorNotification}
+                <div className="mainBlock">
+                <form>
+                        <input type="text"
+                            className="regField"
+                            placeholder="Your Name"
+                            onChange={this.handleChange}
+                            value={this.state.displayName}
+                            name="displayName"/>
+                        <input type="text"
+                            className="regField"
+                            placeholder="Email"
+                            value={this.state.email}
+                            onChange={this.handleChange}
+                            name="email"/>
+                        <input type="password"
+                            className="regField"
+                            placeholder="Password"
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                            name="password"/>
+                        {this.state.redirect ? (
+                            <React.Fragment>
+                                <input type="submit" className="submitBtn" onClick={this.onSignIn} value="ENTER" />
+                                <span className="underLine">
+                                    Not Registered?  <button className="linkBtn" onClick={this.handleClick}>Create an account</button>
+                                </span>    
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <input type="text"
+                                    className="regField"
+                                    placeholder="Profile picture URL (optional)"
+                                    onChange={this.handleChange}
+                                    value={this.state.profilePic}
+                                    name="profilePic"/>
+                                <input onClick={this.onSignUp} type="submit" className="submitBtn" value="REGISTER" />
+                                <span className="underLine">
+                                    Have an account? <button className="linkBtn" onClick={this.handleClick}>Sign in here</button>
+                                </span>
+                            </React.Fragment>   
+                        )}     
+                    </form>  
+                </div>
+            </>
+            
         )
     }
 }
@@ -92,4 +130,4 @@ const mapStateToProps = (state) => {
     return {state}
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(withFirebase(Login));
+export default connect(mapStateToProps,mapDispatchToProps)(withFirebase(withRouter(Login)));

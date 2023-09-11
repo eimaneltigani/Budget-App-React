@@ -42,11 +42,11 @@ const Statistics = () => {
         <div>   
             <h2 css={tw`text-2xl mb-1 font-bold`}>How do you spend?</h2>
             <p>Here's a breakdown of your expenses:</p>
-            <div css={tw`max-h-96 -mb-8 w-full flex justify-center items-center py-3`}>
+            <div css={tw`max-h-96 -mb-10 w-full flex justify-center items-center py-3`}>
                 <Doughnut 
                     data={data} 
                     options={{
-                        aspectRatio: 1.5,
+                        aspectRatio: 1.2,
                         plugins: {
                             legend: {
                                 // position: 'left',

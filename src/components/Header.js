@@ -41,7 +41,7 @@ const NavigationAuth = ({ firebase }) => {
             <Link to="/LandingPage">
                 <Button className="header-button" onClick={logout} css={tw`inline-block`}>
                     <FaSignOutAlt />
-                    <Text>Logout</Text>
+                    <Text css={tw`inline-block`}>Logout</Text>
                 </Button>
             </Link>
         </div>

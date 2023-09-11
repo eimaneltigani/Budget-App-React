@@ -1,3 +1,8 @@
+React Budget App allows users to break down and manage monthly expenses. Users can log in (using Firebase authentication) to save their information to the database and log budgeting goals to track against.
+
+
+![Application Screenshot](../../../../Desktop/Screen%20Shot%202023-09-11%20at%202.23.08%20PM.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

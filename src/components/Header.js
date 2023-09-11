@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import tw from 'twin.macro';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
-import { logout, selectUser } from '../redux/store/userSlice'
+import { login, selectUser } from '../redux/store/userSlice'
 import { FaSignOutAlt } from 'react-icons/fa';
 
 import { withFirebase } from './Firebase';
-
 
 
 const Text = tw.span`hidden lg:inline-block mr-2 italic text-white`;
@@ -32,15 +31,15 @@ const NavigationNonAuth = () => {
 const NavigationAuth = ({ firebase }) => {
     const dispatch = useDispatch();
 
-    // const logoutOfApp = (e, firebase) => {
-    //     dispatch(logout());
-    //     firebase.signOut;
-    // }
+    const logout = () => {
+        dispatch(login(null));
+        firebase.signOut;
+    }
 
     return (        
         <div className="sign-out">
             <Link to="/LandingPage">
-                <Button className="header-button" onClick={firebase.signOut} css={tw`inline-block`}>
+                <Button className="header-button" onClick={logout} css={tw`inline-block`}>
                     <FaSignOutAlt />
                     <Text>Logout</Text>
                 </Button>
